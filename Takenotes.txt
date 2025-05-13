@@ -5,5 +5,7 @@ obj data type		reference var
 					pointer
 
 Student 				tu = 		new Student(...);
+					instance name
 C:\Program Files\...
-			sqlsrv.exe				--> đi vào RAM chờ ai đó yêu câu xử lí data
+					sqlsrv.exe			--> đi vào RAM chờ ai đó yêu câu xử lí data
+										--> INSTANCE
