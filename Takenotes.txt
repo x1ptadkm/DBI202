@@ -36,3 +36,4 @@ USER INTERFACE
 SSMS						<---------->				INSTANCE/DB E/SERV...
 CLIENT TOOL												SERVER
 
+BROWER		---------------------------------------------------------------> SERVER FB. TT. KENH14
