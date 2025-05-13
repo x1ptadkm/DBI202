@@ -9,3 +9,5 @@ Student 				tu = 		new Student(...);
 C:\Program Files\...
 					sqlsrv.exe			--> đi vào RAM chờ ai đó yêu câu xử lí data
 										--> INSTANCE
+											INSTANCE 1 server/đoạn code binary nằm trong RAM - được đặt tên giống tên biến
+WINDOWS CÓ 1 DATA NỘI BỘ (DẠNG CÂY PHÂN CẤP) QUẢN LÍ THÔNG SỐ MÁY, CÁC APP CÀI VÀO... --> REGISTRY
