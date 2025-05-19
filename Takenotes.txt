@@ -1,0 +1,40 @@
+	Student 			anh = 					new Student("SE192861", "Anh Pham", 2005, 8.6);
+class/mold			biến obj						obj/instance
+data type			obj var					thể hiện/hiện thân/phiên bản/đối tượng
+obj data type		reference var	
+					pointer
+
+Student 				tu = 		new Student(...);
+					instance name
+C:\Program Files\...
+					sqlsrv.exe			--> đi vào RAM chờ ai đó yêu câu xử lí data
+										--> INSTANCE
+											INSTANCE 1 server/đoạn code binary nằm trong RAM - được đặt tên giống tên biến
+WINDOWS CÓ 1 DATA NỘI BỘ (DẠNG CÂY PHÂN CẤP) QUẢN LÍ THÔNG SỐ MÁY, CÁC APP CÀI VÀO... --> REGISTRY
+
+
+CLASS    			 -------------- TABLE
+
+INSTANCE new Student()				row/tuple/'record
+
+APP CHẠY NGẦM, KO LỘ RÕ RA, KO CÓ UI/USER INTERFACE ĐỂ TA DÙNG CHUỘT TƯƠNG TÁC
+			KO CÓ MẶT TIỀN, BACKGROUND PROCES, CHƯƠNG TRÌNH CHẠY NỀN
+			KO LỘ RA TRÊN TASKBAR
+DÙNG CUNG CẤP DỊCH VỤ CHO AI ĐÓ XÀI NÓ
+APP NÀY GỌI TÊN KHÁC LÀ SERVICE/SERVICES, PHỤC VỤ, HÀNH ĐỘNG, ICON/BIỂU TƯỢNG CHUNG LÀ 2 BÁNH RĂNG CƯA-ĐỘNG CƠ-RUN-ENGINE
+
+SERVE(V) --> SERVER  --> GÃ CHUYÊN PHỤC VỤ
+SQL SERVER TRONG RAM GỌI: SERVICE, SERVER, DB ENGINE, BACKGROUND PROCESS
+
+Cần nó phục vụ thì mình phải giao tiếp với nó CHUỘT/BÀN PHÍM --> CHẠM ĐƯỢC SERVER
+
+CHẾ RA 1 TOOL		<--------------------------------> SERVER
+MOUSE, KEYBOARD
+	UI
+USER INTERFACE
+
+SSMS						<---------->				INSTANCE/DB E/SERV...
+CLIENT TOOL												SERVER
+
+BROWER		---------------------------------------------------------------> SERVER FB. TT. KENH14
+
