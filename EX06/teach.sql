@@ -1,0 +1,3 @@
+CREATE DATABASE teach
+
+USE teach
