@@ -96,12 +96,15 @@ JOIN tblEmployee E ON D.empSSN=E.empSSN
 JOIN tblDepartment Dept ON E.depNum=Dept.depNum
 WHERE D.depSex='F' AND Dept.depName=N'Phòng Nghiên cứu và phát triển';
 
--- 13. Lấy thông tin người phụ thuộc trên 18 tuổi của "Phòng Nghiên cứu và phát triển"
-SELECT e.empName, d.depName, d.depRelationship
-FROM tblDependent d
-JOIN tblEmployee e ON d.empSSN=e.empSSN
-JOIN tblDepartment dept ON e.depNum=dept.depNum
-WHERE DATEDIFF(YEAR, d.depBirthdate, GETDATE()) > 18 AND dept.depName = N'Phòng Nghiên cứu và phát triển';
+/*13. Cho biết những người phụ thuộc trên 18 tuổi, của nhân viên thuộc phòng ban có tên: 
+"Phòng Nghiên cứu và phát triển". Thông tin yêu cầu: tên nhân viên, tên người phụ thuộc, 
+mối liên hệ giữa người phụ thuộc với nhân viên
+*/
+SELECT E.empName, D.depName, D.depRelationship
+FROM tblDependent D
+JOIN tblEmployee E ON D.empSSN=E.empSSN
+JOIN tblDepartment Dept ON E.depNum=Dept.depNum
+WHERE DATEDIFF(YEAR, D.depBirthdate, GETDATE()) > 18 AND Dept.depName = N'Phòng Nghiên cứu và phát triển';
 
 -- 14. Số lượng người phụ thuộc theo giới tính
 SELECT d.depSex AS GioiTinh, COUNT(*) AS SoLuong
