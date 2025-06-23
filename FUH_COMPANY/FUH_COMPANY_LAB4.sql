@@ -94,7 +94,8 @@ SELECT E.empName, D.depName, D.depRelationship
 FROM tblDependent D
 JOIN tblEmployee E ON D.empSSN=E.empSSN
 JOIN tblDepartment dept ON E.depNum=Dept.depNum
-WHERE D.depSex='F' AND dept.depName=N'Phòng Nghiên cứu và phát triển';
+WHERE D.depSex='F' 
+	AND dept.depName=N'Phòng Nghiên cứu và phát triển';
 
 /*13. Cho biết những người phụ thuộc trên 18 tuổi, của nhân viên thuộc phòng ban có tên: 
 "Phòng Nghiên cứu và phát triển". Thông tin yêu cầu: tên nhân viên, tên người phụ thuộc, 
