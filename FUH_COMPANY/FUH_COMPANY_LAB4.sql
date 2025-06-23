@@ -45,7 +45,7 @@ FROM tblLocation L
 JOIN tblProject P ON L.locNum=P.proNum
 WHERE P.proName='ProjectA';
 
-/*7. Cho biết vị trí làm việc có tên Tp. HCM hiện đang là chỗ làm việc của những dự án nào. 
+/*7. Cho biết vị trí làm việc có tên TP Hồ Chí Minh hiện đang là chỗ làm việc của những dự án nào. 
 Thông tin yêu cầu: mã số, tên dự án
 */
 SELECT P.proNum, P.proName
@@ -78,14 +78,18 @@ JOIN tblProject P ON  D.depNum=P.depNum
 JOIN tblLocation L ON P.locNum=L.locNum
 WHERE D.depName=N'Phòng Nghiên cứu và phát triển';
 
--- 11. Lấy thông tin dự án làm việc tại "Tp. HCM" với phòng ban chịu trách nhiệm
+/*11. Cho biết các dự án làm việc tại TP Hồ Chí Minh.
+Thông tin yêu cầu: mã dự án, tên dự án, tên phòng ban chịu trách nhiệm dự án
+*/
 SELECT P.proNum, P.proName, D.depName
 FROM tblProject P
 JOIN tblLocation L ON P.proNum=L.locNum
 JOIN tblDepartment D ON P.depNum=D.depNum
 WHERE L.locName=N'TP Hồ Chí Minh';
 
--- 12. Lấy thông tin người phụ thuộc nữ của "Phòng Nghiên cứu và phát triển"
+/*12. Cho biết những người phụ thuộc là nữ giới, của nhân viên thuộc phòng ban có tên: "Phòng Nghiên cứu và phát triển". 
+Thông tin yêu cầu: tên nhân viên, tên người phụ thuộc, mối liên hệ giữa người phụ thuộc với nhân viên
+*/
 SELECT e.empName, d.depName, d.depRelationship
 FROM tblDependent d
 JOIN tblEmployee e ON d.empSSN=e.empSSN
