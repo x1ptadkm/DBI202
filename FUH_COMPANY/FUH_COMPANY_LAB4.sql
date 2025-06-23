@@ -36,31 +36,42 @@ SELECT E.empSSN, E.empName
 FROM tblEmployee E
 WHERE E.empSSN=(SELECT supervisorSSN FROM tblEmployee WHERE empName=N'Mai Duy An');
 
--- 6. Lấy thông tin vị trí làm việc của "ProjectA"
-SELECT l.locNum, l.locName
-FROM tblLocation l
-JOIN tblProject p ON l.locNum = p.proNum
-WHERE p.proName = 'ProjectA';
+/*6. Cho biết dự án có tên ProjectA hiện đang làm việc ở đâu. 
+Thông tin yêu cầu: mã số, tên vị trí làm
+việc.
+*/
+SELECT L.locNum, L.locName
+FROM tblLocation L
+JOIN tblProject P ON L.locNum=P.proNum
+WHERE P.proName='ProjectA';
 
--- 7. Lấy thông tin dự án làm việc tại "Tp. HCM"
-SELECT p.proNum, p.proName
-FROM tblProject p
-JOIN tblLocation l ON p.proNum = l.locNum
-WHERE l.locName = N'Tp. HCM';
+/*7. Cho biết vị trí làm việc có tên Tp. HCM hiện đang là chỗ làm việc của những dự án nào. 
+Thông tin yêu cầu: mã số, tên dự án
+*/
+SELECT P.proNum, P.proName
+FROM tblProject P
+JOIN tblLocation L ON P.proNum=L.locNum
+WHERE L.locName=N'TP Hồ Chí Minh';
 
--- 8. Lấy thông tin người phụ thuộc trên 18 tuổi
-SELECT d.depName, d.depBirthdate, e.empName
-FROM tblDependent d
-JOIN tblEmployee e ON d.empSSN = e.empSSN
-WHERE DATEDIFF(YEAR, d.depBirthdate, GETDATE()) > 18;
+/*8. Cho biết những người phụ thuộc trên 18 tuổi.
+Thông tin yêu cầu: tên, ngày tháng năm sinh của người phụ thuộc, tên nhân viên phụ thuộc vào.
+*/
+SELECT D.depName, D.depBirthdate, E.empName
+FROM tblDependent D
+JOIN tblEmployee E ON D.empSSN=E.empSSN
+WHERE DATEDIFF(YEAR, D.depBirthdate, GETDATE()) > 18;
 
--- 9. Lấy thông tin người phụ thuộc là nam giới
-SELECT d.depName, d.depBirthdate, e.empName
-FROM tblDependent d
-JOIN tblEmployee e ON d.empSSN = e.empSSN
-WHERE d.depSex = 'M';
+/*9. Cho biết những người phụ thuộc là nam giới. 
+Thông tin yêu cầu: tên, ngày tháng năm sinh của người phụ thuộc, tên nhân viên phụ thuộc vào
+*/
+SELECT D.depName, D.depBirthdate, E.empName
+FROM tblDependent D
+JOIN tblEmployee E ON D.empSSN=E.empSSN
+WHERE d.depSex='M';
 
--- 10. Lấy thông tin nơi làm việc của "Phòng Nghiên cứu và phát triển"
+/*10. Cho biết những nơi làm việc của phòng ban có tên: Phòng Nghiên cứu và phát triển. 
+Thông tin yêu cầu: mã phòng ban, tên phòng ban, tên nơi làm việc
+*/
 SELECT d.depNum, d.depName, l.locName
 FROM tblDepartment d
 JOIN tblLocation l ON d.depNum = l.depNum
