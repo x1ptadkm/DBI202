@@ -9,30 +9,32 @@ WHERE D.depName=N'Phòng Nghiên cứu và phát triển';
 /*2. Cho phòng ban có tên: Phòng Nghiên cứu và phát triển hiện đang quản lý dự án nào. 
 Thông tin yêu cầu: mã số dụ án, tên dự án, tên phòng ban quản lý
 */
-SELECT p.proNum, p.proName, d.depName
-FROM tblProject p
-JOIN tblDepartment d ON p.depNum = d.depNum
-WHERE d.depName = N'Phòng Nghiên cứu và phát triển';
+SELECT P.proNum, P.proName, D.depName
+FROM tblProject P
+JOIN tblDepartment D ON P.depNum=D.depNum
+WHERE D.depName=N'Phòng Nghiên cứu và phát triển';
 
 /*3. Cho biết dự án có tên ProjectB hiện đang được quản lý bởi phòng ban nào. 
 Thông tin yêu cầu: mã số dụ án, tên dự án, tên phòng ban quản lý
 */
-SELECT p.proNum, p.proName, d.depName
-FROM tblProject p
-JOIN tblDepartment d ON p.depNum = d.depNum
-WHERE p.proName = 'ProjectB';
+SELECT P.proNum, P.proName, D.depName
+FROM tblProject P
+JOIN tblDepartment D ON P.depNum=D.depNum
+WHERE P.proName='ProjectB';
+
 /*4. Cho biết những nhân viên nào đang bị giám sát bởi nhân viên có tên Mai Duy An. 
 Thông tin yêu cầu: mã số nhân viên, họ tên nhân viên
 */
-SELECT e.empSSN, e.empName
-FROM tblEmployee e
-WHERE e.supervisorSSN = (SELECT empSSN FROM tblEmployee WHERE empName = N'Mai Duy An');
+SELECT E.empSSN, E.empName
+FROM tblEmployee E
+WHERE E.supervisorSSN=(SELECT empSSN FROM tblEmployee WHERE empName=N'Mai Duy An');
+
 /*5. Cho biết ai hiện đang giám sát những nhân viên có tên Mai Duy An. 
 Thông tin yêu cầu: mã số nhân viên, họ tên nhân viên giám sát.
 */
-SELECT e.empSSN, e.empName
-FROM tblEmployee e
-WHERE e.empSSN = (SELECT supervisorSSN FROM tblEmployee WHERE empName = N'Mai Duy An');
+SELECT E.empSSN, E.empName
+FROM tblEmployee E
+WHERE E.empSSN=(SELECT supervisorSSN FROM tblEmployee WHERE empName=N'Mai Duy An');
 
 -- 6. Lấy thông tin vị trí làm việc của "ProjectA"
 SELECT l.locNum, l.locName
