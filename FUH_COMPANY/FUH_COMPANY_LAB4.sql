@@ -88,15 +88,15 @@ WHERE L.locName=N'TP Hồ Chí Minh';
 -- 12. Lấy thông tin người phụ thuộc nữ của "Phòng Nghiên cứu và phát triển"
 SELECT e.empName, d.depName, d.depRelationship
 FROM tblDependent d
-JOIN tblEmployee e ON d.empSSN = e.empSSN
-JOIN tblDepartment dept ON e.depNum = dept.depNum
-WHERE d.depSex = 'F' AND dept.depName = N'Phòng Nghiên cứu và phát triển';
+JOIN tblEmployee e ON d.empSSN=e.empSSN
+JOIN tblDepartment dept ON e.depNum=dept.depNum
+WHERE d.depSex='F' AND dept.depName=N'Phòng Nghiên cứu và phát triển';
 
 -- 13. Lấy thông tin người phụ thuộc trên 18 tuổi của "Phòng Nghiên cứu và phát triển"
 SELECT e.empName, d.depName, d.depRelationship
 FROM tblDependent d
-JOIN tblEmployee e ON d.empSSN = e.empSSN
-JOIN tblDepartment dept ON e.depNum = dept.depNum
+JOIN tblEmployee e ON d.empSSN=e.empSSN
+JOIN tblDepartment dept ON e.depNum=dept.depNum
 WHERE DATEDIFF(YEAR, d.depBirthdate, GETDATE()) > 18 AND dept.depName = N'Phòng Nghiên cứu và phát triển';
 
 -- 14. Số lượng người phụ thuộc theo giới tính
@@ -112,38 +112,38 @@ GROUP BY d.depRelationship;
 -- 16. Số lượng người phụ thuộc theo phòng ban
 SELECT d.depNum, d.depName, COUNT(dep.empSSN) AS SoLuong
 FROM tblDepartment d
-LEFT JOIN tblEmployee e ON d.depNum = e.depNum
-LEFT JOIN tblDependent dep ON e.empSSN = dep.empSSN
+LEFT JOIN tblEmployee e ON d.depNum=e.depNum
+LEFT JOIN tblDependent dep ON e.empSSN=dep.empSSN
 GROUP BY d.depNum, d.depName;
 
 -- 17. Phòng ban có ít người phụ thuộc nhất
 SELECT TOP 1 d.depNum, d.depName, COUNT(dep.empSSN) AS SoLuong
 FROM tblDepartment d
-LEFT JOIN tblEmployee e ON d.depNum = e.depNum
-LEFT JOIN tblDependent dep ON e.empSSN = dep.empSSN
+LEFT JOIN tblEmployee e ON d.depNum=e.depNum
+LEFT JOIN tblDependent dep ON e.empSSN=dep.empSSN
 GROUP BY d.depNum, d.depName
 ORDER BY SoLuong ASC;
 
 -- 18. Phòng ban có nhiều người phụ thuộc nhất
 SELECT TOP 1 d.depNum, d.depName, COUNT(dep.empSSN) AS SoLuong
 FROM tblDepartment d
-LEFT JOIN tblEmployee e ON d.depNum = e.depNum
-LEFT JOIN tblDependent dep ON e.empSSN = dep.empSSN
+LEFT JOIN tblEmployee e ON d.depNum=e.depNum
+LEFT JOIN tblDependent dep ON e.empSSN=dep.empSSN
 GROUP BY d.depNum, d.depName
 ORDER BY SoLuong DESC;
 
 -- 19. Tổng số giờ tham gia dự án của mỗi nhân viên
 SELECT e.empSSN, e.empName, d.depName, SUM(w.workHours) AS TongGio
 FROM tblEmployee e
-JOIN tblDepartment d ON e.depNum = d.depNum
-LEFT JOIN tblWorksOn w ON e.empSSN = w.empSSN
+JOIN tblDepartment d ON e.depNum=d.depNum
+LEFT JOIN tblWorksOn w ON e.empSSN=w.empSSN
 GROUP BY e.empSSN, e.empName, d.depName;
 
 -- 20. Tổng số giờ làm dự án của mỗi phòng ban
 SELECT d.depNum, d.depName, SUM(w.workHours) AS TongGio
 FROM tblDepartment d
-JOIN tblEmployee e ON d.depNum = e.depNum
-LEFT JOIN tblWorksOn w ON e.empSSN = w.empSSN
+JOIN tblEmployee e ON d.depNum=e.depNum
+LEFT JOIN tblWorksOn w ON e.empSSN=w.empSSN
 GROUP BY d.depNum, d.depName;
 
 -- 21. Nhân viên có số giờ tham gia dự án ít nhất
