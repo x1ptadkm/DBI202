@@ -74,15 +74,16 @@ Thông tin yêu cầu: mã phòng ban, tên phòng ban, tên nơi làm việc
 */
 SELECT D.depNum, D.depName, L.locName
 FROM tblDepartment D
-JOIN tblLocation L ON D.depNum=L.locName
+JOIN tblProject P ON  D.depNum=P.depNum
+JOIN tblLocation L ON P.locNum=L.locNum
 WHERE D.depName=N'Phòng Nghiên cứu và phát triển';
 
 -- 11. Lấy thông tin dự án làm việc tại "Tp. HCM" với phòng ban chịu trách nhiệm
-SELECT p.projNum, p.projName, d.depName
-FROM tblProject p
-JOIN tblLocation l ON p.projNum = l.projNum
-JOIN tblDepartment d ON p.depNum = d.depNum
-WHERE l.locName = N'Tp. HCM';
+SELECT P.proNum, P.proName, D.depName
+FROM tblProject P
+JOIN tblLocation L ON P.proNum=L.locNum
+JOIN tblDepartment D ON P.depNum=D.depNum
+WHERE L.locName=N'TP Hồ Chí Minh';
 
 -- 12. Lấy thông tin người phụ thuộc nữ của "Phòng Nghiên cứu và phát triển"
 SELECT e.empName, d.depName, d.depRelationship
@@ -372,7 +373,7 @@ HAVING COUNT(d.empSSN) > 3;
 SELECT e.empSSN, e.empName, SUM(w.workHours) AS TongGio
 FROM tblEmployee e
 LEFT JOIN tblWorksOn w ON e.empSSN = w.empSSN
-WHERE e.superiorSSN = (SELECT empSSN FROM tblEmployee WHERE empName = N'MaiDuyAn')
+WHERE e.supervisorSSN = (SELECT empSSN FROM tblEmployee WHERE empName = N'MaiDuyAn')
 GROUP BY e.empSSN, e.empName;
 
 -- Truy vấn bổ sung: Danh sách nhân viên nữ
@@ -400,10 +401,10 @@ JOIN tblDepartment d ON e.depNum = d.depNum
 WHERE d.depName = N'Phòng Dịch vụ chăm sóc khách hàng';
 
 -- Truy vấn bổ sung: Danh sách nhân viên tham gia dự án
-SELECT e.empSSN AS MaNV, e.empName AS TenNV, p.projNum AS MaDuAn, p.projName AS TenDuAn, w.workHours AS SoGioLV
+SELECT e.empSSN AS MaNV, e.empName AS TenNV, p.proNum AS MaDuAn, p.proName AS TenDuAn, w.workHours AS SoGioLV
 FROM tblEmployee e
 JOIN tblWorksOn w ON e.empSSN = w.empSSN
-JOIN tblProject p ON w.projNum = p.projNum;
+JOIN tblProject p ON w.proNum=p.proNum;
 
 -- Truy vấn bổ sung: Nhân viên nam >= 45 tuổi hoặc nữ >= 40 tuổi thuộc "Phòng Phần mềm trong nước"
 SELECT e.empSSN, e.empName
@@ -418,14 +419,14 @@ SELECT e.empSSN, e.empName
 FROM tblEmployee e
 JOIN tblWorksOn w ON e.empSSN = w.empSSN
 GROUP BY e.empSSN, e.empName
-HAVING COUNT(w.projNum) > 20;
+HAVING COUNT(w.proNum) > 20;
 
 -- Truy vấn bổ sung: Nhân viên tham gia hơn 20 dự án, sắp xếp tăng dần theo giờ làm
 SELECT e.empSSN, e.empName, SUM(w.workHours) AS TotalHours
 FROM tblEmployee e
 JOIN tblWorksOn w ON e.empSSN = w.empSSN
 GROUP BY e.empSSN, e.empName
-HAVING COUNT(w.projNum) > 20
+HAVING COUNT(w.proNum) > 20
 ORDER BY TotalHours ASC;
 
 -- Truy vấn bổ sung: Nhân viên có lương từ 7000 đến 12000
