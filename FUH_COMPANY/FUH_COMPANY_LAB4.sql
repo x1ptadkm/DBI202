@@ -185,36 +185,36 @@ GROUP BY e.empSSN, e.empName, d.depName
 HAVING COUNT(w.proNum) >= 2;
 
 -- 26. Số lượng thành viên của mỗi dự án
-SELECT p.projNum, p.projName, COUNT(w.empSSN) AS SoLuongThanhVien
+SELECT p.proNum, p.proName, COUNT(w.empSSN) AS SoLuongThanhVien
 FROM tblProject p
-LEFT JOIN tblWorksOn w ON p.projNum = w.proNum
-GROUP BY p.projNum, p.projName;
+LEFT JOIN tblWorksOn w ON p.proNum = w.proNum
+GROUP BY p.proNum, p.proName;
 
 -- 27. Tổng số giờ làm của mỗi dự án
-SELECT p.projNum, p.projName, SUM(w.workHours) AS TongGio
+SELECT p.proNum, p.proName, SUM(w.workHours) AS TongGio
 FROM tblProject p
-LEFT JOIN tblWorksOn w ON p.projNum = w.proNum
-GROUP BY p.projNum, p.projName;
+LEFT JOIN tblWorksOn w ON p.proNum = w.proNum
+GROUP BY p.proNum, p.proName;
 
 -- 28. Dự án có số lượng thành viên ít nhất
-SELECT TOP 1 p.projNum, p.projName, COUNT(w.empSSN) AS SoLuongThanhVien
+SELECT TOP 1 p.proNum, p.proName, COUNT(w.empSSN) AS SoLuongThanhVien
 FROM tblProject p
-LEFT JOIN tblWorksOn w ON p.projNum = w.proNum
-GROUP BY p.projNum, p.projName
+LEFT JOIN tblWorksOn w ON p.proNum = w.proNum
+GROUP BY p.proNum, p.proName
 ORDER BY SoLuongThanhVien ASC;
 
 -- 29. Dự án có số lượng thành viên nhiều nhất
-SELECT TOP 1 p.projNum, p.projName, COUNT(w.empSSN) AS SoLuongThanhVien
+SELECT TOP 1 p.proNum, p.proName, COUNT(w.empSSN) AS SoLuongThanhVien
 FROM tblProject p
-LEFT JOIN tblWorksOn w ON p.projNum = w.proNum
-GROUP BY p.projNum, p.projName
+LEFT JOIN tblWorksOn w ON p.proNum = w.proNum
+GROUP BY p.proNum, p.proName
 ORDER BY SoLuongThanhVien DESC;
 
 -- 30. Dự án có tổng số giờ làm ít nhất
-SELECT TOP 1 p.projNum, p.projName, SUM(w.workHours) AS TongGio
+SELECT TOP 1 p.proNum, p.proName, SUM(w.workHours) AS TongGio
 FROM tblProject p
-LEFT JOIN tblWorksOn w ON p.projNum = w.proNum
-GROUP BY p.projNum, p.projName
+LEFT JOIN tblWorksOn w ON p.proNum = w.proNum
+GROUP BY p.proNum, p.proName
 ORDER BY TongGio ASC;
 
 -- 31. Dự án có tổng số giờ làm nhiều nhất
