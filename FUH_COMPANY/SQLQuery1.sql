@@ -40,7 +40,7 @@ SELECT A.empSSN, A.empName, A.depNum, B.depName
 FROM tblEmployee A
 	INNER JOIN tblDepartment B ON A.depNum=B.depNum
 
-/*5. DS NHÂN VIÊN CÓ THAM GIA ĐÚ AN: MA NV, TEN NV, MA DU AN, TEN DU AN, SO GIO LV
+/*5. DS NHÂN VIÊN CÓ THAM GIA DỰ AN: MA NV, TEN NV, MA DU AN, TEN DU AN, SO GIO LV
 */
 SELECT e.empSSN AS MaNV, e.empName AS TenNV, p.proNum AS MaDuAn, p.proName AS TenDuAn, w.workHours AS SoGioLV
 FROM tblEmployee e

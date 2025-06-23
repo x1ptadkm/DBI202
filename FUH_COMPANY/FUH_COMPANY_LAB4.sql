@@ -67,15 +67,15 @@ Thông tin yêu cầu: tên, ngày tháng năm sinh của người phụ thuộc
 SELECT D.depName, D.depBirthdate, E.empName
 FROM tblDependent D
 JOIN tblEmployee E ON D.empSSN=E.empSSN
-WHERE d.depSex='M';
+WHERE D.depSex='M';
 
 /*10. Cho biết những nơi làm việc của phòng ban có tên: Phòng Nghiên cứu và phát triển. 
 Thông tin yêu cầu: mã phòng ban, tên phòng ban, tên nơi làm việc
 */
-SELECT d.depNum, d.depName, l.locName
-FROM tblDepartment d
-JOIN tblLocation l ON d.depNum = l.depNum
-WHERE d.depName = N'Phòng Nghiên cứu và phát triển';
+SELECT D.depNum, D.depName, L.locName
+FROM tblDepartment D
+JOIN tblLocation L ON D.depNum=L.locName
+WHERE D.depName=N'Phòng Nghiên cứu và phát triển';
 
 -- 11. Lấy thông tin dự án làm việc tại "Tp. HCM" với phòng ban chịu trách nhiệm
 SELECT p.projNum, p.projName, d.depName
