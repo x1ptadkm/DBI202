@@ -27,13 +27,52 @@ RIGHT JOIN tblWorksOn O ON E.empSSN=O.empSSN;
 SELECT D.depNum, D.depName, E.empSSN, E.empName, E.empSalary
 FROM tblDepartment D, tblEmployee E
 WHERE D.depNum=E.depNum
+
 --4. THÔNG TIN NV GỒM: MÃ PHÒNG, TÊN PHÒNG, SỐ LƯỢNG NHÂN VIÊN
 SELECT D.depNum, D.depName, COUNT(E.empSSN) AS N'SL NV'
 FROM tblDepartment D, tblEmployee E
 WHERE D.depNum=E.depNum
 GROUP BY D.depNum, D.depName
+
 --5. MÃ PHÒNG, TÊN PHÒNG, SỐ LƯỢNG NHÂN VIÊN, TỔNG LƯƠNG TỪNG PHÒNG
-SELECT D.depNum, D.depName, COUNT(E.empSSN) AS N'SL NV', SUM(E.empSalary) AS N'TONG LUONG'
+SELECT D.depNum, D.depName, COUNT(E.empSSN) AS N'SO LUONG NV', SUM(E.empSalary) AS N'TONG LUONG'
 FROM tblDepartment D, tblEmployee E
 WHERE D.depNum=E.depNum
 GROUP BY D.depNum, D.depName
+
+--6. SỐ LƯỢNG DỰ ÁN VÀ TỔNG GIỜ LÀM TỪNG NHÂN VIÊN CÓ THAM GIA DỰ ÁN
+--MÃ NV, TÊN NV, SỐ DỰ ÁN, TỔNG GIỜ LÀM
+SELECT E.empSSN, E.empName, COUNT(O.proNum) AS 'SO DU AN', SUM(O.workHours) AS 'TONG GIO LAM'
+FROM tblEmployee E
+JOIN tblWorksOn O ON E.empSSN=O.empSSN
+GROUP BY E.empSSN, E.empName;
+
+--7. THỐNG KÊ THEO TỪNG PHÒNG SỐ NGƯỜI THAM GIA DỰ ÁN VÀ TỔNG SỐ GIỜ LÀM
+--GỒM: MÃ PHÒNG, TÊN PHÒNG, SỐ NV THAM GIA, TỔNG GIỜ LÀM
+SELECT D.depNum, D.depName, COUNT(DISTINCT O.empSSN) AS 'SO NV THAM GIA', SUM(O.workHours) AS 'TONG GIO LAM'
+FROM tblDepartment D
+JOIN tblEmployee E ON D.depNum=E.depNum
+JOIN tblWorksOn O ON E.empSSN=O.empSSN
+GROUP BY D.depNum, D.depName;
+
+--8. NHÂN VIÊN THAM GIA SỐ DỰ ÁN NHIỀU NHẤT THEO TỪNG PHÒNG
+--GỒM: MÀ PHÒNG, TÊN PHÒNG, SỐ DỰ ÁN THAM GIA
+SELECT *
+FROM tblEmployee 
+
+--9.SỐ LƯỢNG NHÂN VIÊN THAM GIA TỪNG DỰ ÁN
+--GỒM: MÃ DỰ ÁN, TÊN DỰ ÁN, SỐ NV THAM GIA, TỔNG SỐ LÀM
+SELECT P.proNum, P.proName, COUNT(O.empSSN) AS N'SỐ NV THAM GIA', SUM(O.workHours) AS N'TỔNG GIỜ LÀM'
+FROM tblProject P
+LEFT JOIN tblWorksOn O ON P.proNum=O.proNum
+GROUP BY P.proNum, P.proName
+
+
+
+
+
+
+
+
+
+
