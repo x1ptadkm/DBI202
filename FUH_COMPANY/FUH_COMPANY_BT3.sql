@@ -33,6 +33,7 @@ FROM tblDepartment D, tblEmployee E
 WHERE D.depNum=E.depNum
 GROUP BY D.depNum, D.depName
 --5. MÃ PHÒNG, TÊN PHÒNG, SỐ LƯỢNG NHÂN VIÊN, TỔNG LƯƠNG TỪNG PHÒNG
-SELECT D.depNum, D.depName, COUNT(E.empSSN) AS N'SL NV', E.empSalary
+SELECT D.depNum, D.depName, COUNT(E.empSSN) AS N'SL NV', SUM(E.empSalary) AS N'TONG LUONG'
 FROM tblDepartment D, tblEmployee E
 WHERE D.depNum=E.depNum
+GROUP BY D.depNum, D.depName
