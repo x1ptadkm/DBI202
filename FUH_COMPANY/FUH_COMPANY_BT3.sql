@@ -1,10 +1,12 @@
 ﻿--1. THÔNG TIN NV CÓ THAM GIA DỰ ÁN
 SELECT DISTINCT E.*
 FROM tblEmployee E, tblWorksOn O
-WHERE E.empSSN=O.empSSN
+WHERE E.empSSN=O.empSSN;
 
-SELECT * FROM tblEmployee
-WHERE 
+--C2:
+SELECT DISTINCT E.*
+FROM tblEmployee E, tblWorksOn O
+WHERE E.empSSN=O.empSSN;
 
 --2. THÔNG TIN NHÂN VIÊN KHÔNG THAM GIA DỰ ÁN NÀO CẢ
 --C1:
@@ -26,5 +28,11 @@ SELECT D.depNum, D.depName, E.empSSN, E.empName, E.empSalary
 FROM tblDepartment D, tblEmployee E
 WHERE D.depNum=E.depNum
 --4. THÔNG TIN NV GỒM: MÃ PHÒNG, TÊN PHÒNG, SỐ LƯỢNG NHÂN VIÊN
-
+SELECT D.depNum, D.depName, COUNT(E.empSSN) AS N'SL NV'
+FROM tblDepartment D, tblEmployee E
+WHERE D.depNum=E.depNum
+GROUP BY D.depNum, D.depName
 --5. MÃ PHÒNG, TÊN PHÒNG, SỐ LƯỢNG NHÂN VIÊN, TỔNG LƯƠNG TỪNG PHÒNG
+SELECT D.depNum, D.depName, COUNT(E.empSSN) AS N'SL NV', E.empSalary
+FROM tblDepartment D, tblEmployee E
+WHERE D.depNum=E.depNum
