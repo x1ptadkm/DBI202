@@ -1,0 +1,67 @@
+﻿--1 TẠO VIEW_CAU_1DSNV GỒM: MÃ, TÊN, PHÁI, LƯƠNG, TUỔI, THÂM NIÊN
+CREATE VIEW VIEW_CAU_1_DSNV AS
+	SELECT A.empSSN, A.empName, A.empSex, A.empSalary, A.empAddress,
+		TUOI=YEAR(GETDATE()) - YEAR(A.empBirthdate),
+		THAMNIEN=YEAR(GETDATE()) - YEAR(A.empStartdate)
+	FROM tblEmployee A;
+
+--TEST
+SELECT * FROM VIEW_CAU_1_DSNV;
+
+--SỬA VIEW, BỔ SUNG THÊM ĐỊA CHỈ
+ALTER VIEW VIEW_CAU1_DSNV AS
+	SELECT A.empSSN, A.empName, A.empSex, A.empSalary, A.empAddress,
+		TUOI=YEAR(GETDATE()) - YEAR(A.empBirthdate),
+		THAMNIEN=YEAR(GETDATE()) - YEAR(A.empStartdate)
+	FROM tblEmployee A;
+
+--XÓA VIEW
+DROP VIEW VIEW_CAU_1_DSNV;
+
+--2. TẠO VIEW VIEW_CAU2_THONG_KE_THEO_PHONG GỒM: MÃ PHÒNG, TÊN PHÒNG, SỐ NHÂN VIÊN, TỔNG LƯƠNG, MỨC LƯƠNG TB
+CREATE VIEW VIEW_CAU2_DS_THONG_KE_THEO_PHONG AS
+	SELECT D.depNum, D.depName, 
+		COUNT(E.empSSN) AS N'SỐ NHÂN VIÊN',
+		SUM(E.empSalary) AS N'TỔNG LƯƠNG',
+		AVG(E.empSalary) AS N'LƯƠNG TRUNG BÌNH'
+	FROM tblDepartment D, tblEmployee E
+	WHERE D.depNum=E.depNum
+	GROUP BY D.depNum, D.depName;
+--TEST
+SELECT * FROM VIEW_CAU2_DS_THONG_KE_THEO_PHONG;
+
+--3. TẠO VIEW_CAU3_THONG_KE_THEO_DU_AN GỒM: MÃ DỰ ÁN, TÊN DỰ ÁN, SỐ NGƯỜI THAM GIA, TỔNG SỐ GIỜ LÀM
+CREATE VIEW VIEW_CAU3_THONG_KE_THEO_DU_AN AS
+	SELECT P.proNum, P.proName,
+		COUNT(o.empSSN) AS N'SỐ NGƯỜI THAM GIA',
+		SUM(O.workHours) AS N'TỔNG SỐ GIỜ LÀM'
+	FROM tblProject P, tblWorksOn O
+	WHERE P.proNum=O.proNum
+	GROUP BY P.proNum, P.proName;
+--TEST
+SELECT * FROM VIEW_CAU3_THONG_KE_THEO_DU_AN;
+
+--======PROGRAMING=====
+PRINT @@VERSION
+PRINT @@SERVERNAME
+PRINT @@ERROR 
+--BIẾN TOÀN CỤC bắt đầu bằng @@
+/*
+DECLARE @empName NVCHAR(20)
+*/
+
+--=============================
+--IN RA TÊN NV CÓ MÃ SỐ LÀ 30121050294
+--C1
+DECLARE @TENNV AS NVARCHAR(30)
+SELECT @TENNV=A.empName 
+FROM tblEmployee A
+WHERE A.empSSN='30121050294'
+PRINT @TENNV
+--C2
+DECLARE @TENNV AS NVARCHAR(30)
+SET @TENNV=(SELECT A.empName
+			FROM tblEmployee A
+			WHERE A.empSSN='30121050294')
+PRINT @TENNV
+--2. IN RA TÊN, TUỔI, THÂM NIÊN CỦA NHÂN VIÊN CÓ MÃ 30121050294
