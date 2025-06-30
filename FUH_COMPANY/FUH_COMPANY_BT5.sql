@@ -100,7 +100,7 @@ FROM tblEmployee A
 
 --5. THỐNG KÊ NHÂN VIÊN THEO PHÒNG
 --MÃ PHÒNG, TÊN PHÒNG, SỐ NV NAM, SỐ NV NỮ
-SELECT B.depNum, B.depName,
+SELECT B.depNum AS N'STT', B.depName AS 'TÊN PHÒNG',
 	SUM(CASE WHEN A.empSex='F' THEN 1 ELSE 0 END) AS N'TỔNG NV NỮ',
 	SUM(CASE WHEN A.empSex= 'M' THEN 1 ELSE 0 END) AS N'TỔNG NV NAM'
 FROM tblEmployee A, tblDepartment B
