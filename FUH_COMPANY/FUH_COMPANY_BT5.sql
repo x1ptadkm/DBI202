@@ -97,3 +97,12 @@ SELECT	A.empSSN as N'MÃ NV',
 		A.empName AS N'TÊN NV',
 		(CASE A.empSex WHEN 'F' THEN N'NỮ' ELSE N'NAM' END) AS N'GIỚI TÍNH'
 FROM tblEmployee A
+
+--5. THỐNG KÊ NHÂN VIÊN THEO PHÒNG
+--MÃ PHÒNG, TÊN PHÒNG, SỐ NV NAM, SỐ NV NỮ
+SELECT B.depNum, B.depName,
+	SUM(CASE WHEN A.empSex='F' THEN 1 ELSE 0 END) AS N'TỔNG NV NỮ',
+	SUM(CASE WHEN A.empSex= 'M' THEN 1 ELSE 0 END) AS N'TỔNG NV NAM'
+FROM tblEmployee A, tblDepartment B
+WHERE A.depNum=B.depNum
+GROUP BY B.depNum, B.depName
