@@ -100,9 +100,20 @@ FROM tblEmployee A
 
 --5. THỐNG KÊ NHÂN VIÊN THEO PHÒNG
 --MÃ PHÒNG, TÊN PHÒNG, SỐ NV NAM, SỐ NV NỮ
-SELECT B.depNum AS N'STT', B.depName AS 'TÊN PHÒNG',
+SELECT B.depNum AS N'MÃ PHÒNG', B.depName AS 'TÊN PHÒNG',
 	SUM(CASE WHEN A.empSex='F' THEN 1 ELSE 0 END) AS N'TỔNG NV NỮ',
-	SUM(CASE WHEN A.empSex= 'M' THEN 1 ELSE 0 END) AS N'TỔNG NV NAM'
+	SUM(CASE WHEN A.empSex='M' THEN 1 ELSE 0 END) AS N'TỔNG NV NAM'
+FROM tblEmployee A, tblDepartment B
+WHERE A.depNum=B.depNum
+GROUP BY B.depNum, B.depName
+
+--6. THỐNG KÊ NHÂN VIÊN THEO PHÒNG
+--MÃ PHÒNG, TÊN PHÒNG, SỐ NV NAM, SỐ NV NỮ, TỔNG LƯƠNG NV NAM, TỔNG LƯƠNG NV NỮ
+SELECT B.depNum AS N'MÃ PHÒNG', B.depName AS 'TÊN PHÒNG',
+	SUM(CASE WHEN A.empSex='F' THEN 1 ELSE 0 END) AS N'TỔNG NV NỮ',
+	SUM(CASE WHEN A.empSex='M' THEN 1 ELSE 0 END) AS N'TỔNG NV NAM',
+	SUM(CASE WHEN A.empSex='F' THEN A.empSalary ELSE 0 END) AS N'TỔNG LƯƠNG NV NỮ',
+	SUM(CASE WHEN A.empSex='M' THEN A.empSalary ELSE 0 END) AS N'TỔNG LƯƠNG NV NAM'
 FROM tblEmployee A, tblDepartment B
 WHERE A.depNum=B.depNum
 GROUP BY B.depNum, B.depName
